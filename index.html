@@ -15,10 +15,12 @@
 
         <div class="form-content">
             <form id="biodataForm">
+                <!-- Personal Information with Photo -->
                 <div class="form-section">
                     <h2 class="section-title">Personal Information</h2>
                     
                     <div class="personal-info-wrapper">
+                        <!-- Personal Info Fields -->
                         <div class="personal-info-fields">
                             <div class="form-row">
                                 <div class="form-group">
@@ -134,46 +136,28 @@
                             <div class="checkbox-item">
                                 <input type="checkbox" id="skill1" name="skills" value="gardening">
                                 <label for="skill1">Gardening</label>
-<<<<<<< HEAD
                             </div>
                             <div class="checkbox-item">
                                 <input type="checkbox" id="skill2" name="skills" value="Drawing">
                                 <label for="skill2">Drawing</label>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="skill3" name="skills" value="Photography">
-                                <label for="skill3">Photography</label>
+                                <input type="checkbox" id="skill3" name="skills" value="Music">
+                                <label for="skill3">Music</label>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="skill4" name="skills" value="sports">
+                                <input type="checkbox" id="skill4" name="skills" value="Sports">
                                 <label for="skill4">Sports</label>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="skill5" name="skills" value="Music">
-                                <label for="skill5">Music</label>
-=======
->>>>>>> a7a9cbb (update)
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="skill2" name="skills" value="Drawing">
-                                <label for="skill2">Drawing</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="skill3" name="skills" value="Photography">
-                                <label for="skill3">Photography</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="skill4" name="skills" value="sports">
-                                <label for="skill4">Sports</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="skill5" name="skills" value="Music">
-                                <label for="skill5">Music</label>
+                                <input type="checkbox" id="skill5" name="skills" value="leadership">
+                                <label for="skill5">Leadership</label>
                             </div>
                         </div>
                     </div>
                         </div>
 
+                        <!-- Photo Upload Box -->
                         <div class="photo-upload-box">
                             <div class="photo-badge">📸 PHOTO</div>
                             <label for="photo" class="photo-preview-container">
@@ -190,6 +174,7 @@
                     </div>
                 </div>
 
+                <!-- Contact Information -->
                 <div class="form-section">
                     <h2 class="section-title">Contact Information</h2>
                     
@@ -241,6 +226,7 @@
                     </div>
                 </div>
 
+                <!-- Educational Background -->
                 <div class="form-section">
                     <h2 class="section-title">Educational Background</h2>
                     
@@ -293,6 +279,7 @@
                     </div>
                 </div>
 
+                <!-- Professional Information -->
                 <div class="form-section">
                     <h2 class="section-title">Professional Information</h2>
                     
@@ -330,6 +317,7 @@
                     </div>
                 </div>
 
+                <!-- Buttons -->
                 <div class="btn-container">
                     <button type="submit" class="btn-submit">Submit Form</button>
                     <button type="reset" class="btn-reset">Reset Form</button>
@@ -344,6 +332,7 @@
             alert('Form submitted successfully! (This is a demo)');
         });
 
+        // Photo upload functionality
         const photoInput = document.getElementById('photo');
         const photoPreview = document.getElementById('photoPreview');
         const uploadPlaceholder = document.querySelector('.upload-placeholder');
