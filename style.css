@@ -48,8 +48,6 @@
         .form-section {
             margin-bottom: 25px;
         }
-
-        /* Personal Info Section with Photo */
         .personal-info-wrapper {
             display: grid;
             grid-template-columns: 1fr 180px;
@@ -60,8 +58,6 @@
         .personal-info-fields {
             flex: 1;
         }
-
-        /* Photo Upload Box */
         .photo-upload-box {
             width: 180px;
             height: 240px;
