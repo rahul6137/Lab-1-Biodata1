@@ -140,19 +140,20 @@
                                 <label for="skill2">Drawing</label>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="skill3" name="skills" value="Photography">
-                                <label for="skill3">Photography</label>
+                                <input type="checkbox" id="skill3" name="skills" value="Music">
+                                <label for="skill3">Music</label>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="skill4" name="skills" value="sports">
+                                <input type="checkbox" id="skill4" name="skills" value="Sports">
                                 <label for="skill4">Sports</label>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="skill5" name="skills" value="Music">
-                                <label for="skill5">Music</label>
+                                <input type="checkbox" id="skill5" name="skills" value="leadership">
+                                <label for="skill5">Leadership</label>
                             </div>
                         </div>
-
+                    </div>
+                        </div>
                         <div class="photo-upload-box">
                             <div class="photo-badge">📸 PHOTO</div>
                             <label for="photo" class="photo-preview-container">
@@ -168,7 +169,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="form-section">
                     <h2 class="section-title">Contact Information</h2>
                     
@@ -219,7 +219,6 @@
                         <textarea id="permanentAddress" name="permanentAddress"></textarea>
                     </div>
                 </div>
-
                 <div class="form-section">
                     <h2 class="section-title">Educational Background</h2>
                     
@@ -227,7 +226,7 @@
                         <div class="form-group">
                             <label for="qualification">Highest Qualification *</label>
                             <select id="qualification" name="qualification" required>
-                                <option value="">Select Qualification</option>
+                              <option value="">Select Qualification</option>
                                 <option value="highschool">High School</option>
                                 <option value="diploma">Diploma</option>
                                 <option value="bachelor">Bachelor's Degree</option>
@@ -271,7 +270,6 @@
                         <input type="text" id="languages" name="languages" placeholder="e.g., English, Bengali, Hindi">
                     </div>
                 </div>
-
                 <div class="form-section">
                     <h2 class="section-title">Professional Information</h2>
                     
@@ -308,7 +306,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="btn-container">
                     <button type="submit" class="btn-submit">Submit Form</button>
                     <button type="reset" class="btn-reset">Reset Form</button>
@@ -322,7 +319,6 @@
             e.preventDefault();
             alert('Form submitted successfully! (This is a demo)');
         });
-
         const photoInput = document.getElementById('photo');
         const photoPreview = document.getElementById('photoPreview');
         const uploadPlaceholder = document.querySelector('.upload-placeholder');
