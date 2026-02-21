@@ -44,19 +44,39 @@ document.getElementById('biodataForm').addEventListener('submit', function(e) {
         return;
     }
 
-    if (!isValidPhone(phone)) {
-        alert("Phone number must be exactly 11 digits and numeric.");
+    if (!phone) {
+        alert("Phone number is required.");
+        return;
+    }
+    if (!isNumeric(phone)) {
+        alert("Phone number must contain only digits.");
+        return;
+    }
+    if (phone.length !== 11) {
+        alert("Phone number must be exactly 11 digits.");
         return;
     }
 
-    if (alternatePhone && !isValidPhone(alternatePhone)) {
-        alert("Alternate phone number must be exactly 11 digits and numeric.");
-        return;
+    if (alternatePhone) {
+        if (!isNumeric(alternatePhone)) {
+            alert("Alternate phone number must contain only digits.");
+            return;
+        }
+        if (alternatePhone.length !== 11) {
+            alert("Alternate phone number must be exactly 11 digits.");
+            return;
+        }
     }
 
-    if (emergencyContact && !isValidPhone(emergencyContact)) {
-        alert("Emergency contact number must be exactly 11 digits and numeric.");
-        return;
+    if (emergencyContact) {
+        if (!isNumeric(emergencyContact)) {
+            alert("Emergency contact number must contain only digits.");
+            return;
+        }
+        if (emergencyContact.length !== 11) {
+            alert("Emergency contact number must be exactly 11 digits.");
+            return;
+        }
     }
 
     let today = new Date();
