@@ -1,112 +1,80 @@
 document.getElementById('biodataForm').addEventListener('submit', function(e) {
     e.preventDefault();
+
     let form = e.target;
+    let firstName = form.firstName.value.trim();
+    let lastName = form.lastName.value.trim();
+    let fatherName = form.fatherName.value.trim();
+    let motherName = form.motherName.value.trim();
+    let gender = form.gender.value;
+    let dob = form.dob.value;
+    let nationality = form.nationality.value;
+    let email = form.email.value.trim();
+    let phone = form.phone.value.trim();
+    let presentAddress = form.presentAddress.value.trim();
+    let city = form.city.value.trim();
+    let qualification = form.qualification.value;
+    let fieldOfStudy = form.fieldOfStudy.value.trim();
+    let institution = form.institution.value.trim();
+    let photoInput = document.getElementById('photo');
 
-    // Clear previous errors
-    form.querySelectorAll('.error-message').forEach(el => el.innerText='');
+    // Helper function for email validation
+    function isValidEmail(email) {
+        let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,6}$/;
+        return pattern.test(email);
+    }
 
-    let fields = [
-        {id:'firstName', name:'First Name'},
-        {id:'lastName', name:'Last Name'},
-        {id:'fatherName', name:"Father's Name"},
-        {id:'motherName', name:"Mother's Name"},
-        {id:'dob', name:'Date of Birth'},
-        {id:'gender', name:'Gender'},
-        {id:'nationality', name:'Nationality'},
-        {id:'email', name:'Email'},
-        {id:'phone', name:'Phone'},
-        {id:'presentAddress', name:'Present Address'},
-        {id:'city', name:'City'}
-    ];
+    // Helper function for phone validation
+    function isValidPhone(phone) {
+        return /^\d{11}$/.test(phone);
+    }
 
-    let isValid = true;
+    // Required fields check
+    if (!firstName || !lastName || !fatherName || !motherName || !gender || !dob || !nationality || !email || !phone || !presentAddress || !city || !qualification || !fieldOfStudy || !institution) {
+        alert("Please fill all required fields marked with *.");
+        return;
+    }
 
-    fields.forEach(f=>{
-        let input = form[f.id];
-        let errorEl = input?.parentElement.querySelector('.error-message');
+    // Email validation
+    if (!isValidEmail(email)) {
+        alert("Please enter a valid email address.");
+        return;
+    }
 
-        // Gender special case
-        if(f.id==='gender'){
-            let genderChecked = form.querySelector('input[name="gender"]:checked');
-            if(!genderChecked){
-                errorEl.innerText = f.name+" is required.";
-                isValid=false;
-            }
+    // Phone validation
+    if (!isValidPhone(phone)) {
+        alert("Phone number must be 11 digits.");
+        return;
+    }
+
+    // DOB validation (age >= 18)
+    let today = new Date();
+    let birthDate = new Date(dob);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    if (age < 18) {
+        if (!confirm("Your age is less than 18. Do you want to continue?")) {
             return;
         }
+    }
 
-        if(!input.value.trim()){
-            if(errorEl) errorEl.innerText = f.name+" is required.";
-            isValid=false;
-        } else {
-            if(f.id==='email'){
-                let pattern=/^[^ ]+@[^ ]+\.[a-z]{2,6}$/;
-                if(!pattern.test(input.value.trim())){
-                    if(errorEl) errorEl.innerText="Please enter a valid email.";
-                    isValid=false;
-                }
-            }
-            if(f.id==='phone'){
-                let pattern=/^\d{11}$/;
-                if(!pattern.test(input.value.trim())){
-                    if(errorEl) errorEl.innerText="Phone number must be 11 digits.";
-                    isValid=false;
-                }
-            }
-            if(f.id==='dob'){
-                let today=new Date();
-                let birthDate=new Date(input.value);
-                let age=today.getFullYear()-birthDate.getFullYear();
-                let m=today.getMonth()-birthDate.getMonth();
-                if(m<0||(m===0 && today.getDate()<birthDate.getDate())) age--;
-                if(age<18){
-                    if(errorEl) errorEl.innerText="Age is less than 18.";
-                    isValid=false;
-                }
-            }
-        }
-    });
-
-    // Photo validation
-    let photoInput=document.getElementById('photo');
-    let photoError = photoInput.parentElement.querySelector('.error-message');
-    if(photoInput.files.length>0){
+    // Photo validation (optional)
+    if (photoInput.files.length > 0) {
         let file = photoInput.files[0];
-        if(!file.type.startsWith("image/")){
-            if(photoError) photoError.innerText="Please upload a valid image file.";
-            isValid=false;
-        } else if(file.size > 5*1024*1024){
-            if(photoError) photoError.innerText="Photo size must be less than 5MB.";
-            isValid=false;
+        if (!file.type.startsWith("image/")) {
+            alert("Please upload a valid image file for the photo.");
+            return;
+        }
+        if (file.size > 5 * 1024 * 1024) { // 5MB limit
+            alert("Photo size must be less than 5MB.");
+            return;
         }
     }
 
-    if(isValid){
-        alert("Form submitted successfully!");
-        form.submit(); // optional
-    }
-});
-
-// Photo preview functionality
-const photoInput = document.getElementById('photo');
-const photoPreview = document.getElementById('photoPreview');
-const uploadPlaceholder = document.querySelector('.upload-placeholder');
-const changePhotoBtn = document.getElementById('changePhotoBtn');
-
-photoInput.addEventListener('change', function(e){
-    if(e.target.files && e.target.files[0]){
-        const reader=new FileReader();
-        reader.onload=function(event){
-            photoPreview.src=event.target.result;
-            photoPreview.style.display='block';
-            uploadPlaceholder.style.display='none';
-            changePhotoBtn.style.display='block';
-        }
-        reader.readAsDataURL(e.target.files[0]);
-    }
-});
-
-changePhotoBtn.addEventListener('click', function(e){
-    e.preventDefault();
-    photoInput.click();
+    // If all validations pass
+    alert("Form submitted successfully!");
+    form.submit(); // optionally remove if you handle submission via AJAX
 });
