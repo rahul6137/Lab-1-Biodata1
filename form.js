@@ -11,12 +11,8 @@ document.getElementById('biodataForm').addEventListener('submit', function(e) {
     }
 
     function showError(input, message) {
-        // Remove existing error
         let next = input.nextElementSibling;
-        if (next && next.classList.contains('error-msg')) {
-            next.remove();
-        }
-        // Create error message
+        if (next && next.classList.contains('error-msg')) next.remove();
         let error = document.createElement('div');
         error.classList.add('error-msg');
         error.style.color = 'red';
@@ -27,22 +23,23 @@ document.getElementById('biodataForm').addEventListener('submit', function(e) {
 
     function clearError(input) {
         let next = input.nextElementSibling;
-        if (next && next.classList.contains('error-msg')) {
-            next.remove();
-        }
+        if (next && next.classList.contains('error-msg')) next.remove();
     }
 
-    // Clear all previous errors first
     let inputs = form.querySelectorAll('input, select, textarea');
     inputs.forEach(i => clearError(i));
+    let radioGroups = form.querySelectorAll('.radio-group');
+    radioGroups.forEach(r => {
+        let next = r.nextElementSibling;
+        if (next && next.classList.contains('error-msg')) next.remove();
+    });
 
     let firstName = form.firstName.value.trim();
     let lastName = form.lastName.value.trim();
     let fatherName = form.fatherName.value.trim();
     let motherName = form.motherName.value.trim();
-
-    let gender = '';
     let genders = form.querySelectorAll('input[name="gender"]');
+    let gender = '';
     genders.forEach(r => { if (r.checked) gender = r.value; });
 
     let dob = form.dob.value;
@@ -65,7 +62,11 @@ document.getElementById('biodataForm').addEventListener('submit', function(e) {
     if (!lastName) { showError(form.lastName, 'Last name is required'); hasError = true; }
     if (!fatherName) { showError(form.fatherName, "Father's name is required"); hasError = true; }
     if (!motherName) { showError(form.motherName, "Mother's name is required"); hasError = true; }
-    if (!gender) { alert('Please select gender'); hasError = true; } // Radio button, show alert
+    if (!gender) { 
+        let container = form.querySelector('.radio-group'); 
+        showError(container, 'Gender is required'); 
+        hasError = true; 
+    }
     if (!dob) { showError(form.dob, 'Date of birth is required'); hasError = true; }
     if (!nationality) { showError(form.nationality, 'Nationality is required'); hasError = true; }
     if (!email) { showError(form.email, 'Email is required'); hasError = true; }
@@ -90,15 +91,14 @@ document.getElementById('biodataForm').addEventListener('submit', function(e) {
     if (!qualification) { showError(form.qualification, 'Qualification is required'); hasError = true; }
     if (!fieldOfStudy) { showError(form.fieldOfStudy, 'Field of study is required'); hasError = true; }
     if (!institution) { showError(form.institution, 'Institution name is required'); hasError = true; }
-
     if (passingYear && !isNumeric(passingYear)) { showError(form.passingYear, 'Passing year must be numeric'); hasError = true; }
 
     let today = new Date();
     let birthDate = new Date(dob);
     let age = today.getFullYear() - birthDate.getFullYear();
     let m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) { age--; }
-    if (age < 18 && !confirm("Your age is less than 18. Do you want to continue?")) { hasError = true; }
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--;
+    if (age < 18 && !confirm("Your age is less than 18. Do you want to continue?")) hasError = true;
 
     if (photoInput.files.length > 0) {
         let file = photoInput.files[0];
